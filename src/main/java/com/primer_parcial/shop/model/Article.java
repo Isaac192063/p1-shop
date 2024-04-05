@@ -1,5 +1,6 @@
 package com.primer_parcial.shop.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -22,7 +23,8 @@ public class Article {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", unique = true)
+    @JoinColumn(name = "category_id")
+    @JsonBackReference
     private Category category;
 
     @Column(nullable = false)
