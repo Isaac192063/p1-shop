@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("article")
+@RequestMapping("api/article")
 public class ArticleController {
 
     @Autowired
@@ -25,7 +25,7 @@ public class ArticleController {
         return articleService.getArticleById(id);
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public List<Article> getArticleAll(){
         return articleService.getAllArticle();
     }

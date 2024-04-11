@@ -2,12 +2,10 @@ package com.primer_parcial.shop.service.article;
 
 import com.primer_parcial.shop.model.Article;
 import com.primer_parcial.shop.repository.ArticleRepository;
-import com.primer_parcial.shop.service.article.ArticleService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,13 +17,13 @@ public class ArticleServiceImp implements ArticleService {
 
     @Override
     public Article createArticle(Article article) {
+        article.setCategory(article.getCategory());
         return articleRepository.save(article);
     }
 
     @Override
     public Article getArticleById(Long id) {
         Optional<Article> article = articleRepository.findById(id);
-        System.out.println(id);
         if (article.isEmpty()){
             return null;
         }
@@ -49,7 +47,7 @@ public class ArticleServiceImp implements ArticleService {
 
         existingArticle.setDescription(updateArticle.getDescription());
         existingArticle.setPrice(updateArticle.getPrice());
-        existingArticle.setUptated_at(LocalDateTime.now());
+        existingArticle.setUptated_at(LocalDate.now());
 
         return articleRepository.save(existingArticle);
     }

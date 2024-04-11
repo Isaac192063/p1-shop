@@ -5,7 +5,9 @@ import com.primer_parcial.shop.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryServiceImp implements CategoryService{
@@ -20,7 +22,11 @@ public class CategoryServiceImp implements CategoryService{
 
     @Override
     public Category getCategoryById(Long id) {
-        return null;
+        Optional<Category> category = categoryRepository.findById(id);
+        if(category.isEmpty()){
+            return  null;
+        }
+        return category.get();
     }
 
     @Override
@@ -30,6 +36,15 @@ public class CategoryServiceImp implements CategoryService{
 
     @Override
     public Category updateCategory(Long id,Category newArticle) {
-        return null;
+        Optional<Category> candidateCategory = categoryRepository.findById(id);
+
+        if(candidateCategory.isEmpty()){
+            return  null;
+        }
+
+        Category category = candidateCategory.get();
+
+        category.setName(newArticle.getName());
+        return  categoryRepository.save(category);
     }
 }

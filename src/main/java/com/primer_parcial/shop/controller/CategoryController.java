@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("api/category")
 public class CategoryController {
 
     @Autowired
@@ -23,6 +23,16 @@ public class CategoryController {
     @GetMapping()
     public List<Category> getAllCategory(){
         return categoryService.getAllCategory();
+    }
+
+    @PutMapping("/{id}")
+    public Category updateCategory(@RequestBody Category category, @PathVariable Long id){
+        return categoryService.updateCategory(id, category);
+    }
+
+    @GetMapping("/{id}")
+    public Category getCategoryByid(@PathVariable Long  id){
+        return categoryService.getCategoryById(id);
     }
 
 }

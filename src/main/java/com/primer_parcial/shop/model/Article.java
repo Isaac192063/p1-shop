@@ -1,36 +1,36 @@
 package com.primer_parcial.shop.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Data
 @Entity
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cod;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)
-    private double price;
+    private BigDecimal price;
 
     @Column(nullable = false)
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", unique = true)
+    @JoinColumn(name = "category_id")
+    @JsonBackReference
     private Category category;
 
-    @Column(nullable = false)
-    private LocalDateTime created_at;
-    private LocalDateTime uptated_at;
+    @Temporal(TemporalType.DATE)
+    private LocalDate created_at;
 
-    @PrePersist
-    protected void onCreate(){
-        created_at = LocalDateTime.now();
-    }
+    private LocalDate uptated_at;
+
 }
