@@ -45,6 +45,7 @@ public class CategoryServiceImp implements CategoryService{
         Category category = candidateCategory.get();
 
         category.setName(newArticle.getName());
+        category.setDescription(newArticle.getDescription());
         return  categoryRepository.save(category);
     }
 }
