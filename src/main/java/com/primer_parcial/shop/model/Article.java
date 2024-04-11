@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cod;
+    private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 150)
     private String name;
 
     @Column(nullable = false)
@@ -22,6 +22,12 @@ public class Article {
     @Column(nullable = false)
     private String description;
 
+    @Column(nullable = false)
+    private int stock;
+
+    @Column(nullable = false)
+    private String brand;
+
     @ManyToOne
     @JoinColumn(name = "category_id")
     @JsonBackReference
@@ -29,11 +35,16 @@ public class Article {
 
     @Column(nullable = false)
     private LocalDateTime created_at;
-    private LocalDateTime uptated_at;
+    private LocalDateTime updated_at;
 
     @PrePersist
     protected void onCreate(){
         created_at = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate(){
+        updated_at = LocalDateTime.now();
     }
 }
 

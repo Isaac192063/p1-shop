@@ -47,8 +47,9 @@ public class ArticleServiceImp implements ArticleService {
 
         existingArticle.setDescription(updateArticle.getDescription());
         existingArticle.setPrice(updateArticle.getPrice());
-        existingArticle.setUptated_at(LocalDate.now());
-
+        existingArticle.setStock(updateArticle.getStock());
+        existingArticle.setName(updateArticle.getName());
+        existingArticle.setBrand(updateArticle.getBrand());
         return articleRepository.save(existingArticle);
     }
 }
