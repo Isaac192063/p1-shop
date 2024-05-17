@@ -1,6 +1,7 @@
 package com.primer_parcial.shop.controller;
 
 import com.primer_parcial.shop.model.Article;
+import com.primer_parcial.shop.model.mDto.request.Request;
 import com.primer_parcial.shop.service.article.ArticleServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,11 @@ public class ArticleController {
     @PutMapping("/{id}")
     public Article updateArticle(@PathVariable Long id,@RequestBody Article article){
         return articleService.updateArticle(id, article);
+    }
+
+    @GetMapping("/uno")
+    public void asa(@RequestBody Request request){
+        System.out.println(request);
     }
 
 }

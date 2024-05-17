@@ -2,17 +2,18 @@ package com.primer_parcial.shop.service.article;
 
 import com.primer_parcial.shop.model.Article;
 import com.primer_parcial.shop.repository.ArticleRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ArticleServiceImp implements ArticleService {
 
-    @Autowired
+
     private ArticleRepository articleRepository;
 
     @Override
