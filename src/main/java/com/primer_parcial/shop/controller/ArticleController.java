@@ -34,5 +34,4 @@ public class ArticleController {
     public Article updateArticle(@PathVariable Long id,@RequestBody Article article){
         return articleService.updateArticle(id, article);
     }
-
 }

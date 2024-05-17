@@ -1,5 +1,6 @@
 package com.primer_parcial.shop.service.category;
 
+import com.primer_parcial.shop.model.Article;
 import com.primer_parcial.shop.model.Category;
 import com.primer_parcial.shop.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
