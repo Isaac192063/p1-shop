@@ -5,10 +5,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
+@NoArgsConstructor
 @Entity
 public class Article {
 
@@ -16,19 +19,16 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    //@NotBlank(message = "Please provide the name")
-    //@Size(min = 2, max = 50)
+    @NotBlank(message = "Please provide the article name")
+    @Size(min = 2, max = 50)
     private String name;
 
     @Column(nullable = false)
-    //@NotBlank(message = "Please provide the price")
     private BigDecimal price;
 
-    @Column(nullable = false)
-    //@NotBlank(message = "Please provide the description")
+    @NotBlank(message = "Please provide the article description")
+    @Size(min = 1, max = 100)
     private String description;
-
 
     @ManyToOne
     @JoinColumn(name = "category_id")
