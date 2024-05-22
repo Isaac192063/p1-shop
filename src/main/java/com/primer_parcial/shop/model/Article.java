@@ -2,24 +2,31 @@ package com.primer_parcial.shop.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
 @Entity
 public class Article {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 150)
+    @NotBlank(message = "Please provide the article name")
+    @Size(min = 2, max = 50)
     private String name;
 
     @Column(nullable = false)
     private double price;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Please provide the article description")
+    @Size(min = 1, max = 100)
     private String description;
 
     @Column(nullable = false)

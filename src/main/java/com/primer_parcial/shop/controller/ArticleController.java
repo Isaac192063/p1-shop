@@ -3,7 +3,11 @@ package com.primer_parcial.shop.controller;
 import com.primer_parcial.shop.model.Article;
 import com.primer_parcial.shop.model.mDto.request.Request;
 import com.primer_parcial.shop.service.article.ArticleServiceImp;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,28 +21,30 @@ public class ArticleController {
 
 
     @PostMapping()
-    public Article createArticle(@RequestBody Article article){
-        return articleService.createArticle(article);
+    public ResponseEntity<Article> createArticle(@RequestBody @Valid Request<Article> articleRequest){
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(articleService.createArticle(articleRequest.getRequestMessage().getData()));
     }
 
     @GetMapping("/{id}")
-    public Article getArticleById(@PathVariable Long id){
-        return articleService.getArticleById(id);
+    public ResponseEntity<Article> getArticleById(@PathVariable @Positive Long id){
+        return ResponseEntity.ok().body(articleService.getArticleById(id));
     }
 
     @GetMapping()
-    public List<Article> getArticleAll(){
-        return articleService.getAllArticle();
+    public ResponseEntity<List<Article>> getArticleAll(){
+        return ResponseEntity.ok().body(articleService.getAllArticle());
     }
 
     @PutMapping("/{id}")
-    public Article updateArticle(@PathVariable Long id,@RequestBody Article article){
-        return articleService.updateArticle(id, article);
+    public ResponseEntity<Article> updateArticle(
+            @PathVariable @Positive Long id,@RequestBody @Valid Request<Article> articleRequest){
+        return ResponseEntity.ok().body(articleService.updateArticle(id, articleRequest.getRequestMessage().getData()));
     }
 
-    @GetMapping("/uno")
-    public void asa(@RequestBody Request request){
-        System.out.println(request);
+    @PostMapping("/prub")
+    public String exp (@RequestBody Request<Article> articleRequest){
+        System.out.println(articleRequest);
+        return "Hello compa";
     }
-
 }
