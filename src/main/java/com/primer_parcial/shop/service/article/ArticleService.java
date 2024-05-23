@@ -9,4 +9,6 @@ public interface ArticleService {
     Article getArticleById(Long id);
     List<Article> getAllArticle();
     Article updateArticle(Long id, Article newArticle);
+
+    Article deleteArticle(Long id);
 }

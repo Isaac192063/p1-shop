@@ -32,7 +32,7 @@ public class ArticleServiceImp implements ArticleService {
     public Article getArticleById(Long id) {
         Optional<Article> article = articleRepository.findById(id);
         if (article.isEmpty()){
-            throw new NotFoundException("Article not found!");
+            throw new NotFoundException(ErrorMessages.ARTICLE_NOT_FOUND.getMessage());
         }
         return article.get();
     }
@@ -48,7 +48,7 @@ public class ArticleServiceImp implements ArticleService {
         Optional<Article> candidateArticle = articleRepository.findById(id);
 
         if(candidateArticle.isEmpty()){
-            throw new NotFoundException("Article not found!");
+            throw new NotFoundException(ErrorMessages.ARTICLE_NOT_FOUND.getMessage());
         }
 
         Optional<Article> articleFindByName =
@@ -66,5 +66,18 @@ public class ArticleServiceImp implements ArticleService {
         existingArticle.setName(updateArticle.getName());
         existingArticle.setBrand(updateArticle.getBrand());
         return articleRepository.save(existingArticle);
+    }
+    @Override
+    public Article deleteArticle(Long id){
+        Optional<Article> candidateArticle = articleRepository.findById(id);
+
+        if(candidateArticle.isEmpty()){
+            throw new NotFoundException(ErrorMessages.ARTICLE_NOT_FOUND.getMessage());
+        }
+
+        Article article =candidateArticle.get();
+        article.setAvailable(false);
+
+        return  articleRepository.save(article);
     }
 }

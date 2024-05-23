@@ -1,7 +1,8 @@
 package com.primer_parcial.shop.controller;
 
 import com.primer_parcial.shop.model.Article;
-import com.primer_parcial.shop.model.mDto.request.Request;
+import com.primer_parcial.shop.model.dto.Request;
+import com.primer_parcial.shop.model.dto.Response;
 import com.primer_parcial.shop.service.article.ArticleServiceImp;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -21,14 +23,23 @@ public class ArticleController {
 
 
     @PostMapping()
-    public ResponseEntity<Article> createArticle(@RequestBody @Valid Request<Article> articleRequest){
+    public ResponseEntity<Response<Article>> createArticle(@RequestBody @Valid Request<Article> articleRequest){
+
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(articleService.createArticle(articleRequest.getRequestMessage().getData()));
+                .body(Response.<Article>builder()
+                        .date(LocalDateTime.now())
+                        .message(articleService.createArticle(articleRequest.getRequestMessage().getData()))
+                        .statusCode(HttpStatus.CREATED.value())
+                        .build());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Article> getArticleById(@PathVariable @Positive Long id){
-        return ResponseEntity.ok().body(articleService.getArticleById(id));
+    public ResponseEntity<Response<Article>> getArticleById(@PathVariable @Positive Long id){
+        return ResponseEntity.ok().body(Response.<Article>builder()
+                .date(LocalDateTime.now())
+                .message(articleService.getArticleById(id))
+                .statusCode(HttpStatus.OK.value())
+                .build());
     }
 
     @GetMapping()
@@ -37,14 +48,26 @@ public class ArticleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Article> updateArticle(
+    public ResponseEntity<Response<Article>> updateArticle(
             @PathVariable @Positive Long id,@RequestBody @Valid Request<Article> articleRequest){
-        return ResponseEntity.ok().body(articleService.updateArticle(id, articleRequest.getRequestMessage().getData()));
+        return ResponseEntity.ok().body(
+                Response.<Article>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .date(LocalDateTime.now())
+                        .message(articleService.updateArticle(id, articleRequest.getRequestMessage().getData()))
+                        .build()
+                );
     }
 
-    @PostMapping("/prub")
-    public String exp (@RequestBody Request<Article> articleRequest){
-        System.out.println(articleRequest);
-        return "Hello compa";
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Response<Article>> deleteArticle(@PathVariable Long id){
+
+        return ResponseEntity.ok().body(Response
+                .<Article>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .date(LocalDateTime.now())
+                        .message(articleService.deleteArticle(id))
+                .build());
     }
+
 }

@@ -1,7 +1,7 @@
 package com.primer_parcial.shop.controller;
 
 import com.primer_parcial.shop.model.Category;
-import com.primer_parcial.shop.model.mDto.request.Request;
+import com.primer_parcial.shop.model.dto.Request;
 import com.primer_parcial.shop.service.category.CategoryServiceImp;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
@@ -40,4 +40,6 @@ public class CategoryController {
     public ResponseEntity<Category> getCategoryById(@PathVariable @Positive Long  id){
         return ResponseEntity.ok().body(categoryService.getCategoryById(id));
     }
+
+
 }
