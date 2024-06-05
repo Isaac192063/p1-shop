@@ -1,4 +1,4 @@
-package com.primer_parcial.shop.service.category;
+package com.primer_parcial.shop.serviceImp;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.BDDMockito.*;

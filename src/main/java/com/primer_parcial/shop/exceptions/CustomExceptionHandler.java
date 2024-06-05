@@ -76,4 +76,16 @@ public class CustomExceptionHandler {
                 HttpStatus.BAD_REQUEST
         );
     }
+
+    @ExceptionHandler(NotFoundCategory.class)
+    public ResponseEntity<ResponseError> handleNotFoundCategory(NotFoundCategory notFoundCategory){
+
+        System.out.println("fere");
+
+        return  new ResponseEntity<>(ResponseError.builder()
+                .message(List.of(notFoundCategory.getMessage()))
+                .date(LocalDateTime.now())
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .build(), HttpStatus.BAD_REQUEST);
+    }
 }

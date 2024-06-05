@@ -1,4 +1,4 @@
-package com.primer_parcial.shop.service.article;
+package com.primer_parcial.shop.serviceImp;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.BDDMockito.*;
@@ -163,5 +163,5 @@ class ArticleServiceImpTest {
 
         assertThat(exception.getMessage()).isEqualTo(ErrorMessages.ARTICLE_NAME_EXISTS.getMessage());
     }
-    
+
 }

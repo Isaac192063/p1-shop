@@ -1,25 +1,37 @@
-package com.primer_parcial.shop.service.article;
+package com.primer_parcial.shop.serviceImp;
 
 import com.primer_parcial.shop.exceptions.AlreadyExistsException;
+import com.primer_parcial.shop.exceptions.NotFoundCategory;
 import com.primer_parcial.shop.exceptions.NotFoundException;
 import com.primer_parcial.shop.model.Article;
 import com.primer_parcial.shop.model.enums.ErrorMessages;
 import com.primer_parcial.shop.repository.ArticleRepository;
+import com.primer_parcial.shop.repository.CategoryRepository;
+import com.primer_parcial.shop.service.ArticleService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 public class ArticleServiceImp implements ArticleService {
 
-
+    @Autowired
     private ArticleRepository articleRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public Article createArticle(Article article) {
+
+        if(!categoryRepository.existsById(article.getCategory().getId())){
+            throw  new NotFoundCategory(ErrorMessages.CATEGORY_NOT_FOUND.getMessage());
+        }
+
+
         Optional<Article> articleFindByName = articleRepository.findByName(article.getName());
         if(articleFindByName.isPresent()){
             throw new AlreadyExistsException(ErrorMessages.ARTICLE_NAME_EXISTS.getMessage());

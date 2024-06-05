@@ -1,10 +1,11 @@
-package com.primer_parcial.shop.service.category;
+package com.primer_parcial.shop.serviceImp;
 
 import com.primer_parcial.shop.exceptions.AlreadyExistsException;
 import com.primer_parcial.shop.exceptions.NotFoundException;
 import com.primer_parcial.shop.model.Category;
 import com.primer_parcial.shop.model.enums.ErrorMessages;
 import com.primer_parcial.shop.repository.CategoryRepository;
+import com.primer_parcial.shop.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
-public class CategoryServiceImp implements CategoryService{
+public class CategoryServiceImp implements CategoryService {
 
+    @Autowired
     private CategoryRepository categoryRepository;
 
     @Override

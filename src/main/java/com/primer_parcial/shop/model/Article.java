@@ -2,10 +2,12 @@ package com.primer_parcial.shop.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.primer_parcial.shop.validators.CategoriaExists;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +17,6 @@ import org.hibernate.annotations.ColumnDefault;
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
 @Entity
 public class Article {
 
@@ -27,6 +28,7 @@ public class Article {
     @Size(min = 2, max = 50)
     private String name;
 
+    @Positive(message = "Please enter a valid number")
     @Column(nullable = false)
     private double price;
 
@@ -34,16 +36,19 @@ public class Article {
     @Size(min = 1, max = 150)
     private String description;
 
+    @Positive(message = "Please enter a valid number stock")
     @NotNull
     @Column(nullable = false)
     private int stock;
 
+    @NotBlank(message = "Please provide the article brand")
     @Column(nullable = false)
     private String brand;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     @JsonBackReference
+//    @CategoriaExists
     private Category category;
 
     private boolean available;

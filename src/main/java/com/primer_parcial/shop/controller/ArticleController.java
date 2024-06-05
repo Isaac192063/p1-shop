@@ -3,7 +3,7 @@ package com.primer_parcial.shop.controller;
 import com.primer_parcial.shop.model.Article;
 import com.primer_parcial.shop.model.dto.Request;
 import com.primer_parcial.shop.model.dto.Response;
-import com.primer_parcial.shop.service.article.ArticleServiceImp;
+import com.primer_parcial.shop.serviceImp.ArticleServiceImp;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
 import org.springframework.beans.factory.annotation.Autowired;

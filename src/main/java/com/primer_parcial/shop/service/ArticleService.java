@@ -1,4 +1,4 @@
-package com.primer_parcial.shop.service.article;
+package com.primer_parcial.shop.service;
 
 import com.primer_parcial.shop.model.Article;
 
