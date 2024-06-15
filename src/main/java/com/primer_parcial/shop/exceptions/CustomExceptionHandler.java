@@ -1,6 +1,5 @@
 package com.primer_parcial.shop.exceptions;
 
-import com.primer_parcial.shop.model.dto.Response;
 import com.primer_parcial.shop.model.dto.ResponseError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +46,6 @@ public class CustomExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseError> handleValidationException(MethodArgumentNotValidException ex){
         List<String> errors = new ArrayList<>();
-        System.out.println("hola mundo");
         ex.getBindingResult().getAllErrors().forEach((error ) -> {
             String[] fieldParts = ((FieldError) error).getField().split("\\.");
             String fieldName = fieldParts[fieldParts.length - 1];
@@ -77,15 +75,4 @@ public class CustomExceptionHandler {
         );
     }
 
-    @ExceptionHandler(NotFoundCategory.class)
-    public ResponseEntity<ResponseError> handleNotFoundCategory(NotFoundCategory notFoundCategory){
-
-        System.out.println("fere");
-
-        return  new ResponseEntity<>(ResponseError.builder()
-                .message(List.of(notFoundCategory.getMessage()))
-                .date(LocalDateTime.now())
-                .statusCode(HttpStatus.BAD_REQUEST.value())
-                .build(), HttpStatus.BAD_REQUEST);
-    }
 }

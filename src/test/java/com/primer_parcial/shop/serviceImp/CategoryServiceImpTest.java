@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.primer_parcial.shop.exceptions.AlreadyExistsException;
 import com.primer_parcial.shop.exceptions.NotFoundException;
 import com.primer_parcial.shop.model.Category;
-import com.primer_parcial.shop.model.enums.ErrorMessages;
+import com.primer_parcial.shop.model.enums.ErrorMessage;
 import com.primer_parcial.shop.repository.CategoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -62,7 +62,7 @@ class CategoryServiceImpTest {
             categoryServiceImp.createCategory(category);
         });
 
-        assertThat(exception.getMessage()).isEqualTo(ErrorMessages.CATEGORY_NAME_EXISTS.getMessage());
+        assertThat(exception.getMessage()).isEqualTo(ErrorMessage.CATEGORY_NAME_EXISTS.getMessage());
     }
 
 
@@ -86,7 +86,7 @@ class CategoryServiceImpTest {
             categoryServiceImp.getCategoryById(1L);
         });
 
-        assertThat(exception.getMessage()).isEqualTo(ErrorMessages.CATEGORY_NOT_FOUND.getMessage());
+        assertThat(exception.getMessage()).isEqualTo(ErrorMessage.CATEGORY_NOT_FOUND.getMessage());
     }
 
     @DisplayName("traer todas las category")
@@ -135,7 +135,7 @@ class CategoryServiceImpTest {
             categoryServiceImp.updateCategory(1L, newCategory);
         });
 
-        assertThat(exception.getMessage()).isEqualTo(ErrorMessages.CATEGORY_NOT_FOUND.getMessage());
+        assertThat(exception.getMessage()).isEqualTo(ErrorMessage.CATEGORY_NOT_FOUND.getMessage());
     }
 
     @DisplayName("Actualizar categoría - Nombre ya existe")
@@ -152,7 +152,7 @@ class CategoryServiceImpTest {
             categoryServiceImp.updateCategory(1L, newCategory);
         });
 
-        assertThat(exception.getMessage()).isEqualTo(ErrorMessages.CATEGORY_NAME_EXISTS.getMessage());
+        assertThat(exception.getMessage()).isEqualTo(ErrorMessage.CATEGORY_NAME_EXISTS.getMessage());
     }
 
 }

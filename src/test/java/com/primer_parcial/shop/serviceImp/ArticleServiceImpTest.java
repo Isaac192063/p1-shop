@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.primer_parcial.shop.exceptions.AlreadyExistsException;
 import com.primer_parcial.shop.exceptions.NotFoundException;
 import com.primer_parcial.shop.model.Article;
-import com.primer_parcial.shop.model.enums.ErrorMessages;
+import com.primer_parcial.shop.model.enums.ErrorMessage;
 import com.primer_parcial.shop.repository.ArticleRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -63,7 +63,7 @@ class ArticleServiceImpTest {
             articleServiceImp.createArticle(article);
         });
 
-        assertThat(exception.getMessage()).isEqualTo(ErrorMessages.ARTICLE_NAME_EXISTS.getMessage());
+        assertThat(exception.getMessage()).isEqualTo(ErrorMessage.ARTICLE_NAME_EXISTS.getMessage());
     }
     @DisplayName("Obtener articulo por ID")
     @Test
@@ -85,7 +85,7 @@ class ArticleServiceImpTest {
             articleServiceImp.getArticleById(1L);
         });
 
-        assertThat(exception.getMessage()).isEqualTo(ErrorMessages.ARTICLE_NOT_FOUND.getMessage());
+        assertThat(exception.getMessage()).isEqualTo(ErrorMessage.ARTICLE_NOT_FOUND.getMessage());
     }
     @DisplayName("listar articulo")
     @Test
@@ -144,7 +144,7 @@ class ArticleServiceImpTest {
             articleServiceImp.updateArticle(1L, article);
         });
 
-        assertThat(exception.getMessage()).isEqualTo(ErrorMessages.ARTICLE_NOT_FOUND.getMessage());
+        assertThat(exception.getMessage()).isEqualTo(ErrorMessage.ARTICLE_NOT_FOUND.getMessage());
     }
 
     @DisplayName("Actualizar categoría - Nombre ya existe")
@@ -161,7 +161,7 @@ class ArticleServiceImpTest {
             articleServiceImp.updateArticle(1L, newarticle);
         });
 
-        assertThat(exception.getMessage()).isEqualTo(ErrorMessages.ARTICLE_NAME_EXISTS.getMessage());
+        assertThat(exception.getMessage()).isEqualTo(ErrorMessage.ARTICLE_NAME_EXISTS.getMessage());
     }
 
 }
