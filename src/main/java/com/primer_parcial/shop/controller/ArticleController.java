@@ -30,7 +30,8 @@ public class ArticleController {
                         .date(LocalDateTime.now())
                         .message(articleService.createArticle(articleRequest.getRequestMessage().getData()))
                         .statusCode(HttpStatus.CREATED.value())
-                        .build());
+                        .build()
+                );
     }
 
     @GetMapping("/{id}")
@@ -39,12 +40,20 @@ public class ArticleController {
                 .date(LocalDateTime.now())
                 .message(articleService.getArticleById(id))
                 .statusCode(HttpStatus.OK.value())
-                .build());
+                .build()
+        );
     }
 
     @GetMapping()
-    public ResponseEntity<List<Article>> getArticleAll(){
-        return ResponseEntity.ok().body(articleService.getAllArticle());
+    public ResponseEntity<Response<List<Article>>> getArticleAll(){
+        return ResponseEntity.ok().body(
+                Response.<List<Article>>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .message(articleService.getAllArticle())
+                        .date(LocalDateTime.now())
+                        .build()
+
+                );
     }
 
     @PutMapping("/{id}")
@@ -67,7 +76,8 @@ public class ArticleController {
                         .statusCode(HttpStatus.OK.value())
                         .date(LocalDateTime.now())
                         .message(articleService.deleteArticle(id))
-                .build());
+                .build()
+        );
     }
 
 }

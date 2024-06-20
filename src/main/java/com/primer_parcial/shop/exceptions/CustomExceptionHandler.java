@@ -75,4 +75,18 @@ public class CustomExceptionHandler {
         );
     }
 
+    @ExceptionHandler(AuthenticationFailedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ResponseError> authenticationFailedException(
+            AuthenticationFailedException ex){
+        return new ResponseEntity<>(
+                ResponseError.builder()
+                        .date(LocalDateTime.now())
+                        .message(List.of(ex.getMessage()))
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
+                        .build(),
+                HttpStatus.BAD_REQUEST
+        );
+    }
+
 }

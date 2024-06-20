@@ -32,8 +32,13 @@ public class CategoryController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Category>> getAllCategory(){
-        return ResponseEntity.ok().body(categoryService.getAllCategory());
+    public ResponseEntity<Response<List<Category>>> getAllCategory(){
+        return ResponseEntity.ok().body(
+                Response.<List<Category>>builder()
+                        .date(LocalDateTime.now())
+                        .message(categoryService.getAllCategory())
+                        .statusCode(HttpStatus.OK.value())
+                        .build());
     }
 
     @PutMapping("/{id}")

@@ -4,9 +4,11 @@ import com.primer_parcial.shop.exceptions.AlreadyExistsException;
 import com.primer_parcial.shop.exceptions.NotFoundException;
 import com.primer_parcial.shop.model.User;
 import com.primer_parcial.shop.model.enums.ErrorMessage;
+import com.primer_parcial.shop.model.enums.Role;
 import com.primer_parcial.shop.repository.UserRepository;
 import com.primer_parcial.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,14 +18,20 @@ public class UserServiceImp implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Override
     public User createUser(User user) {
-        Optional<User> optionalUser = userRepository.findByEmailAndIdNot(user.getEmail(), user.getId());
+        Optional<User> optionalUser = userRepository.findByEmail(user.getEmail());
 
         if (optionalUser.isPresent()){
+
             throw  new AlreadyExistsException(ErrorMessage.USER_EMAIL_EXIST.getMessage());
         }
+        user.setRole(Role.USER);
+
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         return userRepository.save(user);
     }
 

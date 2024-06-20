@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,7 +19,6 @@ import java.util.List;
 
 @Data
 @Entity
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class User implements UserDetails {
@@ -53,7 +51,7 @@ public class User implements UserDetails {
     private String phoneNumber;
 
     @NotNull(message = "please provide the password")
-    @Size(min = 8,max = 15)
+    @Size(min = 8,message = "Please enter at least 8 characters")
     private String password;
 
     @Enumerated(EnumType.STRING)
