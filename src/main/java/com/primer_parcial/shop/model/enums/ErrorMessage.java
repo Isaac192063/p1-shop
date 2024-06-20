@@ -10,7 +10,8 @@ public enum ErrorMessage {
     CATEGORY_NAME_EXISTS("The category is already registered!"),
     USER_NOT_FOUND("user not found"),
     USER_EMAIL_EXIST("the email is already registered"),
-    CREDENTIAL_INVALID("the credential is invalid");
+    CREDENTIAL_INVALID("the credential is invalid"),
+    VALUE_NO_VALID("The value must be an integer");
 
     private final String message;
 
