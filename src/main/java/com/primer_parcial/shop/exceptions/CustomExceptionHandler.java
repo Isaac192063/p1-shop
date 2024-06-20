@@ -1,6 +1,8 @@
 package com.primer_parcial.shop.exceptions;
 
 import com.primer_parcial.shop.model.dto.ResponseError;
+import com.primer_parcial.shop.model.enums.ErrorMessage;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -68,7 +70,7 @@ public class CustomExceptionHandler {
         return new ResponseEntity<>(
                 ResponseError.builder()
                         .date(LocalDateTime.now())
-                        .message(List.of("The value must be an integer"))
+                        .message(List.of(ErrorMessage.VALUE_NO_VALID.getMessage()))
                         .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build(),
                 HttpStatus.BAD_REQUEST
